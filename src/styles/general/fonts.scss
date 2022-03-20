@@ -1,0 +1,48 @@
+$font--light: 100;
+$font--regular: 300;
+$font--medium: 500;
+$font--bold: 700;
+
+// --------------------------------COMFORTAA--------------------------------
+@font-face{
+    font-family: "Comfortaa";
+    src: url('../fonts/Comfortaa-Light.ttf') format('truetype');
+    font-weight: $font--light;
+}
+@font-face{
+    font-family: "Comfortaa";
+    src: url('../fonts/Comfortaa-Regular.ttf') format('truetype');
+    font-weight: $font--regular;
+}
+@font-face{
+    font-family: "Comfortaa";
+    src: url('../fonts/Comfortaa-Medium.ttf') format('truetype');
+    font-weight: $font--medium;
+}
+@font-face{
+    font-family: "Comfortaa";
+    src: url('../fonts/Comfortaa-Bold.ttf') format('truetype');
+    font-weight: $font--bold;
+}
+
+// --------------------------------IBMPLEX--------------------------------
+@font-face{
+    font-family: "IBMPlex";
+    src: url('../fonts/IBMPlexSansArabic-ExtraLight.ttf') format('truetype');
+    font-weight: $font--light;
+}
+@font-face{
+    font-family: "IBMPlex";
+    src: url('../fonts/IBMPlexSansArabic-Regular.ttf') format('truetype');
+    font-weight: $font--regular;
+}
+@font-face{
+    font-family: "IBMPlex";
+    src: url('../fonts/IBMPlexSansArabic-Medium.ttf') format('truetype');
+    font-weight: $font--medium;
+}
+@font-face{
+    font-family: "IBMPlex";
+    src: url('../fonts/IBMPlexSansArabic-Bold.ttf') format('truetype');
+    font-weight: $font--bold;
+}
