@@ -7,7 +7,6 @@ const routes = {
   home: '/',
   app: '/app'
 }
-
 const routeName = {
   home: 'Home',
   app: 'App'
@@ -24,7 +23,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Layout pages={pages} />}>
+        <Route path={`${routes.home}`} element={<Layout pages={pages} />}>
           {Object.keys(routeElement).map(route => 
             <Route key={route} path={routes[route]} element={routeElement[route]}/>
           )}
