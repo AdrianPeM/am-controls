@@ -1,10 +1,10 @@
-import { AwesomeAnimation, CharacterField, Loading, TextField } from 'components'
+import { AwesomeAnimation, CharacterField, Flex, Grid, Loading, TextField } from 'components'
 import React, { useState } from 'react'
 
 const TestComponents = () => {
     const [pass, setPass] = useState('')
     return (
-        <div style={{display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '1em 2em', padding: '1em'}}>
+        <Grid w100 h100 centerItems columns='auto 1fr' gap='1em 2em' padding='1em'>
             <p>CharacterField</p>
             <CharacterField length='6'/>
             <p>TextField</p>
@@ -15,7 +15,12 @@ const TestComponents = () => {
             <div style={{height: '40px', width: '10em'}}>
                 <Loading isLoading={true} />
             </div>
-        </div>
+            <p>Flex</p>
+            <Flex padding='1em' justify='center' style={{gap: '15px'}} onClick={e => console.log(e._reactName, ' flex')}>
+                <p>First item</p>
+                <p>Second item</p>
+            </Flex>
+        </Grid>
     )
 }
 

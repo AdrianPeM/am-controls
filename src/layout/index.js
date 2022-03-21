@@ -4,13 +4,14 @@ import Header from './Header'
 
 import 'utils/fontAwesome'
 import './styles.scss'
+import { Grid } from 'components'
 
 const Layout = ({pages = []}) => {
     return (
-        <div style={{display: 'grid', gridTemplateRows: 'auto 1fr'}}>
+        <Grid rows='auto 1fr'>
             <Header {...{pages}}/>
             <Outlet />
-        </div>
+        </Grid>
     )
 }
 

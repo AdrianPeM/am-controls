@@ -1,3 +1,7 @@
+// ---------------------------CONTAINERS--------------------------
+export {default as Grid} from './containers/Grid'
+export {default as Flex} from './containers/Flex'
+
 // ---------------------------IMAGERY--------------------------
 export {default as AnimationPlayer} from './imagery/AnimationPlayer'
 export {default as AwesomeAnimation} from './imagery/AwesomeAnimation'
