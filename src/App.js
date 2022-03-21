@@ -15,7 +15,9 @@ const routeName = {
 }
 
 const routeElement = {
-  home: <div style={{display:'grid', placeContent:'center'}}>Hello Home!</div>,
+  home: <div style={{display:'grid', placeContent:'center'}}>
+      Hello Home!
+    </div>,
   app: <AppPage/>,
   tesComponents: <TestComponents/>,
 }

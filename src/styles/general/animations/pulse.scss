@@ -1,0 +1,15 @@
+.animation--pulse {
+    animation-name: pulse;
+    animation-timing-function: ease;
+    animation-duration: 0.6s;
+    transform-origin: center;
+}
+
+@keyframes pulse {
+    0% {transform: rotate(-15deg);}
+    20% {transform: rotate(15deg);}
+    40% {transform: rotate(-15deg);}
+    60% {transform: rotate(15deg);}
+    80% {transform: rotate(-15deg);}
+    100% {transform: rotate(15deg);}
+}

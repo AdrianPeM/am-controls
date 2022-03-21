@@ -1,0 +1,30 @@
+.animation--upDown {
+    animation-name: upDown;
+    animation-timing-function: ease;
+    animation-duration: 0.6s;
+    transform-origin: center;
+}
+.animation--downUp {
+    animation-name: downUp;
+    animation-timing-function: ease;
+    animation-duration: 0.6s;
+    transform-origin: center;
+}
+
+
+
+@keyframes upDown {
+    0% {transform: translateY(-2%);}
+    25% {transform: translateY(2%);}
+    50% {transform: translateY(-2%);}
+    75% {transform: translateY(2%);}
+    100% {transform: translateY(0);}
+}
+
+@keyframes downUp {
+    0% {transform: translateY(2%);}
+    25% {transform: translateY(-2%);}
+    50% {transform: translateY(2%);}
+    75% {transform: translateY(-2%);}
+    100% {transform: translateY(0);}
+}
