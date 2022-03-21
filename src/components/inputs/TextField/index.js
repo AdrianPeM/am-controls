@@ -1,5 +1,5 @@
 import React, { forwardRef, memo, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
-// import fastCompare from 'react-fast-compare'
+import reactFastCompare from 'react-fast-compare'
 
 const TextField = forwardRef( function TextField (props, ref) {
     /*------------------------------------PROPS--------------------------------*/
@@ -57,4 +57,4 @@ const TextField = forwardRef( function TextField (props, ref) {
     )
 })
 
-export default memo(TextField)
+export default memo(TextField, reactFastCompare)
