@@ -1,20 +1,23 @@
 import Layout from 'layout'
-import { AppPage } from 'pages'
+import { AppPage, TestComponents } from 'pages'
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route, Link as PageLink } from 'react-router-dom'
 
 const routes = {
   home: '/',
-  app: '/app'
+  app: '/app',
+  tesComponents: '/tesComponents',
 }
 const routeName = {
   home: 'Home',
-  app: 'App'
+  app: 'App',
+  tesComponents: 'TestComponents',
 }
 
 const routeElement = {
-  home: <div style={{display:'grid', placeContent:'center', color:'#fff'}}>Hello Home!</div>,
-  app: <AppPage/>
+  home: <div style={{display:'grid', placeContent:'center'}}>Hello Home!</div>,
+  app: <AppPage/>,
+  tesComponents: <TestComponents/>,
 }
 
 const App = () => {

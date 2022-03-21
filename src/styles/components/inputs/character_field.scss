@@ -1,0 +1,17 @@
+.character_field {
+    width: fit-content;
+    display: grid;
+    grid-auto-flow: column;
+    gap: 0.25em;
+
+    .character_field__input {
+        max-width: 32px;
+        text-align: center;
+        padding: 8px 8px 4px 8px;
+        border-radius: 0.5em;
+        border-color: var(--border-color--second-alter);
+        &:focus {
+            border-color: var(--border-color--third);
+        }
+    }
+}

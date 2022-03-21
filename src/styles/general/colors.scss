@@ -1,0 +1,170 @@
+@function hexToRgb($color){
+    @return red($color), green($color), blue($color);
+}
+// ------Variables syntax -----
+// --property--color--variant
+// --property--color--variant--interaction
+// --property--status
+
+// ----------------------CUSTOM COLORS-------------------
+
+$black--1: hexToRgb(#000000);
+$white--1: hexToRgb(#FFFFFF);
+$white--2: hexToRgb(#f3f3f3);
+$red--1: hexToRgb(#F00);
+$red--2: hexToRgb(#ff9191);
+$gray--1: hexToRgb(#b8bdd4);
+$gray--2: hexToRgb(#a6b1e1);
+$gray--3: hexToRgb(#17192e);
+$purple--1: hexToRgb(#DCD6F7);
+$purple--2: hexToRgb(#bf85d6);
+
+
+@mixin colorVariants($colorVariant, $color) {
+    --text-color--#{$colorVariant}: RGB(#{$color});
+    --border-color--#{$colorVariant}: RGB(#{$color});
+    --bg-color--#{$colorVariant}: RGB(#{$color});
+}
+
+body {
+
+    @include colorVariants(first, $gray--3);
+    @include colorVariants(first-alter, $gray--2);
+    @include colorVariants(second, $gray--2);
+    @include colorVariants(second-alter, $gray--1);
+    @include colorVariants(third, $purple--2);
+    @include colorVariants(third-alter, $purple--1);
+    @include colorVariants(error, $red--1);
+    @include colorVariants(error-alter, $red--2);
+    @include colorVariants('white', $white--1);
+    @include colorVariants(white-alter, $white--2);
+    @include colorVariants('black', $black--1);
+
+    &.theme--first {
+        background-color: RGB(#{$white--1});
+    }
+
+    &.theme--dark {
+        background-color: RGB(#{$black--1});
+        @include colorVariants(first, $gray--1);
+    }
+}
+
+
+// ----------------------THEME COLORS-------------------
+
+
+// @mixin generate-variables($colorName, $colorVariant, $colorValue, $properties: 'all', $interactions: false, $interactionColorValue: null) {
+//     @if $properties == 'all' {
+//         --text-color--#{$colorName}--#{$colorVariant}: RGB(#{$colorValue});
+//         --border-color--#{$colorName}--#{$colorVariant}: RGB(#{$colorValue});
+//         --bg-color--#{$colorName}--#{$colorVariant}: RGB(#{$colorValue});
+//         @if $interactions {
+//             --text-color--#{$colorName}--#{$colorVariant}--hover: RGB(#{$interactionColorValue});
+//             --border-color--#{$colorName}--#{$colorVariant}--hover: RGB(#{$interactionColorValue});
+//             --bg-color--#{$colorName}--#{$colorVariant}--hover: RGB(#{$interactionColorValue});
+//             --text-color--#{$colorName}--#{$colorVariant}--focus: RGB(#{$interactionColorValue});
+//             --border-color--#{$colorName}--#{$colorVariant}--focus: RGB(#{$interactionColorValue});
+//             --bg-color--#{$colorName}--#{$colorVariant}--focus: RGB(#{$interactionColorValue});
+//         }
+//     }
+//     @if $properties == 'text' {
+//         --text-color--#{$colorName}--#{$colorVariant}: RGB(#{$colorValue});
+//         --text-color--#{$colorName}--#{$colorVariant}--hover: RGB(#{$interactionColorValue});
+//         --text-color--#{$colorName}--#{$colorVariant}--focus: RGB(#{$interactionColorValue});
+//     }
+//     @if $properties == 'border' {
+//         --border-color--#{$colorName}--#{$colorVariant}: RGB(#{$colorValue});
+//         --border-color--#{$colorName}--#{$colorVariant}--hover: RGB(#{$interactionColorValue});
+//         --border-color--#{$colorName}--#{$colorVariant}--focus: RGB(#{$interactionColorValue});
+//     }
+//     @if $properties == 'bg' {
+//         --bg-color--#{$colorName}--#{$colorVariant}: RGB(#{$colorValue});
+//         --bg-color--#{$colorName}--#{$colorVariant}--hover: RGB(#{$interactionColorValue});
+//         --bg-color--#{$colorName}--#{$colorVariant}--focus: RGB(#{$interactionColorValue});
+//     }
+//     @if $properties == 'text-border' {
+//         --text-color--#{$colorName}--#{$colorVariant}: RGB(#{$colorValue});
+//         --text-color--#{$colorName}--#{$colorVariant}--hover: RGB(#{$interactionColorValue});
+//         --text-color--#{$colorName}--#{$colorVariant}--focus: RGB(#{$interactionColorValue});
+//         --border-color--#{$colorName}--#{$colorVariant}: RGB(#{$colorValue});
+//         --border-color--#{$colorName}--#{$colorVariant}--hover: RGB(#{$interactionColorValue});
+//         --border-color--#{$colorName}--#{$colorVariant}--focus: RGB(#{$interactionColorValue});
+//     }
+//     @if $properties == 'text-bg' {
+//         --text-color--#{$colorName}--#{$colorVariant}: RGB(#{$colorValue});
+//         --text-color--#{$colorName}--#{$colorVariant}--hover: RGB(#{$interactionColorValue});
+//         --text-color--#{$colorName}--#{$colorVariant}--focus: RGB(#{$interactionColorValue});
+//         --bg-color--#{$colorName}--#{$colorVariant}: RGB(#{$colorValue});
+//         --bg-color--#{$colorName}--#{$colorVariant}--hover: RGB(#{$interactionColorValue});
+//         --bg-color--#{$colorName}--#{$colorVariant}--focus: RGB(#{$interactionColorValue});
+//     }
+//     @if $properties == 'border-bg' {
+//         --border-color--#{$colorName}--#{$colorVariant}: RGB(#{$colorValue});
+//         --border-color--#{$colorName}--#{$colorVariant}--hover: RGB(#{$interactionColorValue});
+//         --border-color--#{$colorName}--#{$colorVariant}--focus: RGB(#{$interactionColorValue});
+//         --bg-color--#{$colorName}--#{$colorVariant}: RGB(#{$colorValue});
+//         --bg-color--#{$colorName}--#{$colorVariant}--hover: RGB(#{$interactionColorValue});
+//         --bg-color--#{$colorName}--#{$colorVariant}--focus: RGB(#{$interactionColorValue});
+//     }
+// }
+
+// body {
+//     @include generate-variables('white', first, $white);
+//     @include generate-variables('black', first, $black);
+
+//     &.theme--light {
+//         background-color: var(--bg-color--white--first);
+//         --text-color--error: RGB(#{$red--3});
+//         --text-color--error--hover: RGB(#{$red--1});
+//         --border-color--error: RGB(#{$red--3});
+//         --border-color--error--hover: RGB(#{$red--1});
+//         --bg-color--error: RGB(#{$red--3});
+//         --bg-color--error--hover: RGB(#{$red--1});
+        
+//         @each $colorVariant in first, second, third, fourth, fifth, error {
+//             @if $colorVariant == first {
+//                 @include generate-variables('gray', $colorVariant, $gray--1);
+//                 @include generate-variables('blue', $colorVariant, $blue--1, $interactions: true, $interactionColorValue: $blue--5);
+//                 @include generate-variables('red', $colorVariant, $red--1, $interactions: true, $interactionColorValue: $red--5);
+//             }
+//             @if $colorVariant == second {
+//                 @include generate-variables('gray', $colorVariant, $gray--2);
+//                 @include generate-variables('blue', $colorVariant, $blue--2);
+//                 @include generate-variables('red', $colorVariant, $red--2);
+//             }
+//             @if $colorVariant == third {
+//                 @include generate-variables('gray', $colorVariant, $gray--3);
+//                 @include generate-variables('blue', $colorVariant, $blue--3);
+//                 @include generate-variables('red', $colorVariant, $red--3);
+//             }
+//             @if $colorVariant == fourth {
+//                 @include generate-variables('gray', $colorVariant, $gray--4, $interactions: true, $interactionColorValue: $gray--1);
+//                 @include generate-variables('blue', $colorVariant, $blue--4, $interactions: true, $interactionColorValue: $blue--1);
+//                 @include generate-variables('red', $colorVariant, $red--4, $interactions: true, $interactionColorValue: $red--1);
+//             }
+//             @if $colorVariant == fifth {
+//                 @include generate-variables('gray', $colorVariant, $gray--5, $interactions: true, $interactionColorValue: $gray--2);
+//                 @include generate-variables('blue', $colorVariant, $blue--5, $interactions: true, $interactionColorValue: $blue--2);
+//                 @include generate-variables('red', $colorVariant, $red--5, $interactions: true, $interactionColorValue: $red--2);
+//             }
+//         }
+//     }
+
+//     &.theme--dark {
+//         background-color: var(--bg-color--black--first);
+//         --text-color--error: RGB(#{$red--1});
+//         --text-color--error--hover: RGB(#{$red--4});
+//         --border-color--error: RGB(#{$red--1});
+//         --border-color--error--hover: RGB(#{$red--4});
+//         --bg-color--error: RGB(#{$red--1});
+//         --bg-color--error--hover: RGB(#{$red--4});
+
+//         @each $colorVariant in first, second, third, fourth, fifth {
+//             @include generate-variables('gray', $colorVariant, $white, 'text');
+//             @include generate-variables('black', $colorVariant, $black, 'bg');
+//             @include generate-variables('blue', $colorVariant, $blue--5, $interactions: true, $interactionColorValue: $blue--1);
+//             @include generate-variables('red', $colorVariant, $red--5, $interactions: true, $interactionColorValue: $red--1);
+//         }
+//     }
+// }
