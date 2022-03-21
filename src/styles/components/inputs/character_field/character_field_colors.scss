@@ -1,0 +1,15 @@
+.character_field {
+    &.status--normal {
+        .character_field__input {
+            border-color: var(--border-color--second-alter);
+            &:focus {
+                border-color: var(--border-color--third);
+            }
+        }
+    }
+    &.status--error {
+        .character_field__input {
+            border-color: var(--border-color--error-alter);
+        }
+    }
+}

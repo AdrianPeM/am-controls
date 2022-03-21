@@ -1,36 +1,46 @@
 import React, { createRef, forwardRef, memo, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react'
 
+const generateArray = length => [...Array(parseInt(length)).keys()]
+
 const CharacterField = (props, ref) => {
     //--------------------PROPS--------------------
+    let { className } = props
     const {
         length = 1,
-        value = '',
-        onChange = () => { }
+        initValue = '',
+        onChange = () => {}
     } = props
 
-    const lengthArray = [...Array(parseInt(length)).keys()]
+    const lengthArray = useMemo(() => generateArray(length), [length])
 
     //--------------------STATE--------------------
-    const [inputValue, setValue] = useState([...value])
+    const [value, setValue] = useState(initValue.split('', initValue.length))
 
     //--------------------REF--------------------
     const inputsRef = useRef(lengthArray.map(() => createRef()))
-
+    const characterFieldRef = useRef()
+    
     //--------------------FUNCTIONS--------------------
+    const onChangeValue = (v) => {
+        onChange(v.slice(0, v.length))
+    }
+    
     const cursorToEnd = (i) => {
         setTimeout(() => {
             document.activeElement.setSelectionRange(1, 1)
+            // inputsRef.current[i].current.setSelectionRange(1, 1)
         }, 30)
     }
 
-    const handleFocus = (e) => {
-        if (inputValue.length === length) {
-            inputsRef.current[length - 1].current.focus()
-            return
+    const handleFocus = useCallback(() => {
+        if (value.length === length) {
+            // cursorToEnd(length - 1)
+            return inputsRef.current[length - 1].current.focus()
         }
 
-        inputsRef.current[inputValue.length].current.focus()
-    }
+        inputsRef.current[value.length].current.focus()
+        // cursorToEnd(value.length)
+    }, [value])
 
     const handleChange = (v, i) => {
         setValue(val => {
@@ -41,22 +51,24 @@ const CharacterField = (props, ref) => {
         })
 
         inputsRef.current[i].current.value = inputsRef.current[i].current.value.toUpperCase()
-
+        
         if (i === length - 1) return
 
         inputsRef.current[i + 1].current.focus()
     }
 
-    const handleDelete = (e, i) => {
+    const handleKeyDown = (e, i) => {
+        if (e.key === 'Tab' || e.key === 'Escape') return setTimeout(() => {e.target.blur()}, 50)
+        
         if (e.target.value === '' && (e.key === 'Backspace' || e.key === 'Delete')) {
-            if (i === 0) return e.preventDefault()
-
             setValue(val => {
                 val.pop()
                 onChange(val)
                 return val
             })
-
+            
+            if (i === 0) return e.preventDefault()
+            
             inputsRef.current[i - 1].current.value = ''
             inputsRef.current[i - 1].current.focus()
             return
@@ -64,29 +76,21 @@ const CharacterField = (props, ref) => {
 
         if (e.target.value !== '' && i === length - 1 && e.key !== 'Backspace' && e.key !== 'Delete')
             return e.preventDefault()
-    }
-
-    const handlePaste = async (e) => {
-        try {
-            e.preventDefault()
-            const text = await navigator.clipboard.readText()
-
-            inputsRef.current.map((ref, i) => {
-                ref.current.value = text[i]
-                setValue(val => {
-                    val[i] = text[i]
-                    return val
-                })
-            })
             
-            onChange(text.slice(0, length))
-
-            e.target.blur()
-        } catch (error) {
+    }
+    
+    const handlePaste = async e => {
+        e.preventDefault()
+        try {
+            const text = await window.navigator.clipboard.readText()
+            
+            handleSetValue(text)
+            
+        } catch(error) {
             console.log(error)
         }
     }
-
+    
     const handleReset = useCallback(() => {
         inputsRef.current.forEach(ref => { 
             ref.current.value = ''
@@ -95,24 +99,63 @@ const CharacterField = (props, ref) => {
                 return val
             })
         })
+        
         onChange('')
         
+        document.activeElement.blur()
+    
     }, [inputsRef, onChange])
+    
+    const handleSetValue = useCallback((text) => {
+        inputsRef.current.map((ref, i) => {
+            ref.current.value = text[i]
+            setValue(val => {
+                val[i] = text[i]
+                return val
+            })
+        })
+        
+        onChange(text.slice(0, length))
+        
+        document.activeElement.blur()
+    }, [inputsRef, onChange])
+    
+    const setStatus = useCallback((status) => {
+        const currClass = characterFieldRef.current.className
+        const statusClass = `status--${status}`
+        
+        if(characterFieldRef.current.className.includes(statusClass)) return
+        
+        if(currClass.includes('status'))
+            characterFieldRef.current.className = currClass.slice(0, currClass.indexOf('status')).concat(statusClass)
+        else
+            characterFieldRef.current.classList.add(statusClass)
+    }, [characterFieldRef])
     
     //--------------------IMPERATIVEHANDLE--------------------
     useImperativeHandle(ref, () => ({
-        reset: handleReset
-    }), [handleReset])
+        reset: handleReset,
+        setValue: handleSetValue,
+        setStatus
+    }), [handleReset, setStatus])
     
     //--------------------EFFECT--------------------
     useEffect(() => {
-        if (value !== '')
-            inputsRef.current.map((ref, i) => { ref.current.value = value[i] })
+        if (initValue !== '') {
+            inputsRef.current.map((ref, i) => { ref.current.value = initValue[i] })
+            onChangeValue(initValue)
+        }
 
-        return () => { }
+        return () => {}
     }, [])
-
+    
+    useEffect(() => {
+        setStatus('normal')
+    }, [])
+    
     //--------------------RENDER--------------------
+    className = className ? `${className} character_field` : 'character_field'
+    
     const inputs = useMemo(() => lengthArray.map((i) => {
         return <input
             key={i}
@@ -124,12 +167,12 @@ const CharacterField = (props, ref) => {
             onFocus={handleFocus}
             onPaste={handlePaste}
             onChange={(e) => handleChange(e.target.value, i)}
-            onKeyDown={(e) => handleDelete(e, i)}
+            onKeyDown={(e) => handleKeyDown(e, i)}
         />
     }), [length])
 
     return (
-        <div className='character_field'>
+        <div ref={characterFieldRef} className={className}>
             {inputs}
         </div>
     )

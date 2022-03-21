@@ -1,6 +1,7 @@
 @import 'imagery/animation_player.scss';
 
-@import 'inputs/character_field.scss';
+@import 'inputs/character_field/character_field.scss';
+@import 'inputs/character_field/character_field_colors.scss';
 @import 'inputs/text_field.scss';
 
 @import 'loading/loading.scss';
