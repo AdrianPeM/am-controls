@@ -1,7 +1,10 @@
-import Layout from 'layout'
-import { AppPage, TestComponents } from 'pages'
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route, Link as PageLink } from 'react-router-dom'
+import { useComposeProviders } from 'hooks'
+
+import { AppPage, TestComponents } from 'pages'
+import Layout from 'layout'
+import { ScreenSizeContextProvider } from 'context/ScreenSizeContext'
 
 const routes = {
   home: '/',
@@ -15,26 +18,29 @@ const routeName = {
 }
 
 const routeElement = {
-  home: <div style={{display:'grid', placeContent:'center'}}>
-      Hello Home!
-    </div>,
-  app: <AppPage/>,
-  tesComponents: <TestComponents/>,
+  home: <div style={{ display: 'grid', placeContent: 'center' }}>
+    Hello Home!
+  </div>,
+  app: <AppPage />,
+  tesComponents: <TestComponents />,
 }
 
 const App = () => {
   const pages = Object.keys(routes).map(route => <PageLink key={route} to={routes[route]}>{routeName[route]}</PageLink>)
 
+  const RouterProviders = useComposeProviders(Router, Routes)
+  const AppProviders = useComposeProviders(ScreenSizeContextProvider)
+
   return (
-    <Router>
-      <Routes>
+    <AppProviders>
+      <RouterProviders>
         <Route path={`${routes.home}`} element={<Layout pages={pages} />}>
-          {Object.keys(routeElement).map(route => 
-            <Route key={route} path={routes[route]} element={routeElement[route]}/>
+          {Object.keys(routeElement).map(route =>
+            <Route key={route} path={routes[route]} element={routeElement[route]} />
           )}
         </Route>
-      </Routes>
-    </Router>
+      </RouterProviders>
+    </AppProviders>
   )
 }
 
