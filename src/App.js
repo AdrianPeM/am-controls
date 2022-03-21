@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route, Link as PageLink } from 'react-
 const routes = {
   home: '/',
   app: '/app',
-  tesComponents: '/tesComponents',
+  tesComponents: '/testComponents',
 }
 const routeName = {
   home: 'Home',
