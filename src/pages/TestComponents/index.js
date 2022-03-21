@@ -5,7 +5,7 @@ const TestComponents = () => {
     const [pass, setPass] = useState('')
     return (
         <div>
-            <CharacterField length={6}/>
+            <CharacterField length='6'/>
             <TextField type='password' label='Password' placeholder='Type password' value={pass} onChange={setPass}/>
         </div>
     )

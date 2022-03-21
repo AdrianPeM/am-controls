@@ -8,7 +8,7 @@ const CharacterField = (props, ref) => {
         onChange = () => { }
     } = props
 
-    const lengthArray = [...Array(length).keys()]
+    const lengthArray = [...Array(parseInt(length)).keys()]
 
     //--------------------STATE--------------------
     const [inputValue, setValue] = useState([...value])
