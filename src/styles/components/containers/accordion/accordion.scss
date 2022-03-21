@@ -1,0 +1,41 @@
+.accordion {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &.open {
+        .accordion_title .title__arrow {
+            transform: rotate(-180deg);
+        }
+    }
+    
+    .accordion_title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        padding: 0.5em;
+        border-width: 2px;
+        border-bottom-style: solid;
+
+        .accordion_title__text {
+            font-size: getTextSize(4);
+            font-weight: bold;
+        }
+
+        .title__arrow {
+            transition: transform 0.3s;
+            transform-origin: center;
+        }
+    }
+
+    .accordion__content_container {
+        overflow: hidden;
+        will-change: height;
+        transition: height 0.3s;
+    }
+    
+    .accordion__content {
+        padding: 0.5em;
+    }
+}

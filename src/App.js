@@ -25,17 +25,18 @@ const routeElement = {
 const App = () => {
   const pages = Object.keys(routes).map(route => <PageLink key={route} to={routes[route]}>{routeName[route]}</PageLink>)
 
-  return (
-    <Router>
-      <Routes>
-        <Route path={`${routes.home}`} element={<Layout pages={pages} />}>
-          {Object.keys(routeElement).map(route => 
-            <Route key={route} path={routes[route]} element={routeElement[route]}/>
-          )}
-        </Route>
-      </Routes>
-    </Router>
-  )
+  return <TestComponents/>
+  //  (
+  //   <Router>
+  //     <Routes>
+  //       <Route path={`${routes.home}`} element={<Layout pages={pages} />}>
+  //         {Object.keys(routeElement).map(route => 
+  //           <Route key={route} path={routes[route]} element={routeElement[route]}/>
+  //         )}
+  //       </Route>
+  //     </Routes>
+  //   </Router>
+  // )
 }
 
 export default App

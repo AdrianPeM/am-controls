@@ -1,0 +1,18 @@
+.accordion {
+    .accordion_title {
+        border-bottom-color: var(--border-color--second-alter);
+
+        .title__arrow {
+            svg {
+                color: var(--bg-color--second-alter);
+            }
+        }
+
+        &:hover {
+            border-bottom-color: var(--bg-color--third);
+            .title__arrow svg {
+                color: var(--bg-color--third);
+            }
+        }
+    }
+}

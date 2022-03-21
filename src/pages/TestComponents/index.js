@@ -1,5 +1,7 @@
-import { AwesomeAnimation, CharacterField, Flex, Grid, Loading, TextField } from 'components'
-import React, { useState } from 'react'
+import React, { memo, useState } from 'react'
+import reactFastCompare from 'react-fast-compare'
+
+import { Accordion, AwesomeAnimation, CharacterField, Flex, Grid, Loading, TextField } from 'components'
 
 const TestComponents = () => {
     const [pass, setPass] = useState('')
@@ -17,11 +19,17 @@ const TestComponents = () => {
             </div>
             <p>Flex</p>
             <Flex padding='1em' justify='center' style={{gap: '15px'}} onClick={e => console.log(e._reactName, ' flex')}>
-                <p>First item</p>
-                <p>Second item</p>
+                <p>Click</p>
+                <p>Console log</p>
             </Flex>
+            <p>Accordion</p>
+            <Accordion title='Lorem ipsum'>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus maiores libero, praesentium dolorum fugiat, perspiciatis nam ipsum deleniti, ut aliquam hic enim accusantium quisquam quo sit temporibus magni iure. Magnam!
+                </p>
+            </Accordion>
         </Grid>
     )
 }
 
-export default TestComponents
+export default memo(TestComponents, reactFastCompare)
