@@ -9,14 +9,14 @@ const Grid = (props, ref) => {
     const {
         children, padding, margin, gap, columns, rows, autoColumns, autoRows,
         direction, itemsX, itemsY, contentX, contentY,
-        centerContent, centerItems, w100, h100,
+        centerContent, centerItems, w100, h100, maxWidth,
         ...rest
     } = props
 
     style = useMemo(() => {
         return {display: 'grid',
-        padding: padding,
-        margin: margin,
+        padding,
+        margin,
         gap: gap,
         gridTemplateColumns: columns,
         gridTemplateRows: rows,
@@ -31,6 +31,7 @@ const Grid = (props, ref) => {
         placeItems: centerItems && 'center',
         width: w100 && '100%',
         height: h100 && '100%',
+        maxWidth,
         ...style}
     }, [padding, margin, gap, columns, rows, autoColumns, autoRows,
         direction, centerContent, centerItems,
