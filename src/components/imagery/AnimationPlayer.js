@@ -1,12 +1,12 @@
-import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { forwardRef, memo, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
+import reactFastCompare from 'react-fast-compare'
 
 const AnimationPlayer = (props, ref) => {
-    let {
+    let { duration } = props
+    const {
         children,
         animation,
-        duration,
-        hover,
+        hover = false,
     } = props
 
     /*------------------------------------STATE---------------------------------*/
@@ -54,20 +54,4 @@ const AnimationPlayer = (props, ref) => {
     )
 }
 
-AnimationPlayer.propTypes = {
-    ref: PropTypes.shape({ current: PropTypes.object }),
-    children: PropTypes.node,
-    animation: PropTypes.string,
-    duration: PropTypes.number,
-    hover: PropTypes.bool,
-}
-
-AnimationPlayer.defaultProps = {
-    ref: null,
-    children: null,
-    animation: undefined,
-    duration: undefined,
-    hover: false,
-}
-
-export default forwardRef(AnimationPlayer)
+export default memo(forwardRef(AnimationPlayer), reactFastCompare)

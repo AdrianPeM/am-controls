@@ -1,4 +1,6 @@
 .animation_player {
-    display: inline-flex;
-    vertical-align: middle;
+    display: grid;
+    place-content: center;
+    width: fit-content;
+    height: fit-content;
 }
