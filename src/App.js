@@ -9,12 +9,12 @@ import { ScreenSizeContextProvider } from 'context/ScreenSizeContext'
 const routes = {
   home: '/',
   app: '/app',
-  tesComponents: '/testComponents',
+  testComponents: '/testComponents',
 }
 const routeName = {
   home: 'Home',
   app: 'App',
-  tesComponents: 'TestComponents',
+  testComponents: 'TestComponents',
 }
 
 const routeElement = {
@@ -22,7 +22,7 @@ const routeElement = {
     Hello Home!
   </div>,
   app: <AppPage />,
-  tesComponents: <TestComponents />,
+  testComponents: <TestComponents />,
 }
 
 const App = () => {
