@@ -13,3 +13,6 @@ export { default as TextField } from './inputs/TextField'
 
 // ---------------------------LOADING---------------------------
 export { default as Loading } from './loading/Loading'
+
+// ---------------------------MODAL---------------------------
+export { default as MessageBox } from './modal/MessageBox'

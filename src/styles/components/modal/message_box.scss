@@ -1,0 +1,22 @@
+.message_box_modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: RGBA(0, 0, 0, 0.4);
+    z-index: 1000;
+
+    .message_box {
+        max-width: 40em;
+        max-height: 60vh;
+        border-radius: 1em;
+        background-color: white;
+
+        .message_box__title {
+        }
+        .message_box__content {
+            overflow: auto;
+        }
+        .message_box__buttons {
+        }
+    }
+}

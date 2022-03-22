@@ -1,10 +1,16 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useRef, useState } from 'react'
 import reactFastCompare from 'react-fast-compare'
 
-import { Accordion, AwesomeAnimation, CharacterField, Flex, Grid, Loading, TextField } from 'components'
+import { Accordion, AwesomeAnimation, CharacterField, Flex, Grid, Loading, MessageBox, TextField } from 'components'
 
 const TestComponents = () => {
     const [pass, setPass] = useState('')
+    const messageBoxRef = useRef()
+
+    const showMb = () => {
+        messageBoxRef.current.show({title: 'Title', content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus maiores libero, praesentium dolorum fugiat'})
+    }
+    
     return (
         <Grid w100 h100 centerItems columns='auto 1fr' gap='1em 2em' padding='1em'>
             <p>CharacterField</p>
@@ -28,6 +34,9 @@ const TestComponents = () => {
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus maiores libero, praesentium dolorum fugiat, perspiciatis nam ipsum deleniti, ut aliquam hic enim accusantium quisquam quo sit temporibus magni iure. Magnam!
                 </p>
             </Accordion>
+            <p>MessageBox</p>
+            <button onClick={showMb}>Show MB</button>
+            <MessageBox ref={messageBoxRef}/>
         </Grid>
     )
 }
