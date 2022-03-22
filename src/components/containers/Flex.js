@@ -26,7 +26,7 @@ const Flex = (props, ref) => {
     className = className ? `${className} grid` : 'grid'
 
     return (
-        <div ref={ref} {...{ className, style: newStyle, ...rest }}>
+        <div ref={ref} {...{ ...rest, className, style: newStyle }}>
             {children}
         </div>
     )
