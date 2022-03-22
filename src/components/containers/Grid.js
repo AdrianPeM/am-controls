@@ -40,7 +40,7 @@ const Grid = (props, ref) => {
     className = className ? `${className} grid` : 'grid'
     
     return (
-        <div ref={ref} {...{ className, style, ...rest }}>
+        <div ref={ref} {...{...rest, style, className }}>
             {children}
         </div>
     )
