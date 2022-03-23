@@ -9,6 +9,7 @@ export { default as AwesomeAnimation } from './imagery/AwesomeAnimation'
 
 // ---------------------------INPUTS---------------------------
 export { default as CharacterField } from './inputs/CharacterField'
+export { default as RadioButton } from './inputs/RadioButton'
 export { default as TextField } from './inputs/TextField'
 
 // ---------------------------LOADING---------------------------

@@ -1,0 +1,22 @@
+.radio_button {
+    .radio_button__input {
+        display: flex;
+        width: fit-content;
+        height: fit-content;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &.checked {
+            .radio_button__circle {
+                visibility: visible;
+            }
+        }
+        .radio_button__circle {
+            width: 12px;
+            height: 12px;
+            margin: 6px;
+            border-radius: 50%;
+            visibility: hidden;
+        }
+    }
+}
