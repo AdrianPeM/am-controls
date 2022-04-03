@@ -1,0 +1,40 @@
+.implementacion_dimensiones__grid {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    padding: 20px;
+    // background: black;
+
+    .implementacion_dimensiones__item {
+        display: grid;
+        align-content: start;
+        gap: 2em;
+        padding: 10px;
+        border: 1px solid #c7c7c7;
+        // background-color: white;
+        &:nth-child(-n + 4) {
+            align-items: center;
+            background-color: #c7c7c7;
+            border-left: 1px solid white;
+        }
+        &:first-child {
+            border-left: none;
+        }
+        &:nth-child(-n + 3) {
+            border-right: 1px solid white;
+        }
+
+        &.item_dimension, &.item_departments {
+            p {
+                font-weight: bold;
+            }
+        }
+        &.item_measure, &.item_status {
+            p:first-child {
+                font-weight: bold;
+            }
+        }
+        b {
+            font-weight: bold;
+        }
+    }
+}

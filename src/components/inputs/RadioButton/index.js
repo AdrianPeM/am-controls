@@ -2,18 +2,27 @@ import Grid from 'components/containers/Grid'
 import React, { Fragment, memo, useCallback, useRef, useState } from 'react'
 import reactFastCompare from 'react-fast-compare'
 
+const generateObject = array => {
+    const result = {}
+    for(const key of array) {
+        result[key] = false
+    }
+    return result
+}
+
 const RadioButton = (props) => {
     const {
-        gap = '0.25em',
+        gap = '1em',
         columns,
         rows,
         direction = 'row',
         onChange,
-        inputs = {},
+        inputs = [],
         labels = {},
+        likert = false,
     } = props
 
-    const [value, setValue] = useState(inputs)
+    const [value, setValue] = useState(generateObject(inputs))
 
     const currentValue = useRef('')
 
@@ -31,11 +40,14 @@ const RadioButton = (props) => {
 
     return (
         <Grid centerItems className='radio_button' {...{ columns, direction, gap, rows }}>
-            {Object.keys(inputs).map(inputName => (
+            {inputs.map(inputName => (
                 <Fragment key={`frag-${inputName}`}>
                     {labels[inputName] && <p key={`lbl-${inputName}`}>{labels[inputName]}</p>}
-                    <div key={inputName} className={`radio_button__input${value[inputName] ? ' checked' : ''}`} onClick={() => handleChange(inputName)}>
-                        <div className='radio_button__circle' />
+                    <div
+                        key={inputName}
+                        className={`radio_button__input${value[inputName] ? ' checked' : ''}`}
+                        onClick={() => handleChange(inputName)}>
+                        <div className={`radio_button__circle${likert ? ` size__${Math.abs(inputName)+1}`:''}`} />
                     </div>
                 </Fragment>
             ))}

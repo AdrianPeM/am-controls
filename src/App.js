@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route, Link as PageLink } from 'react-router-dom'
 import { useComposeProviders } from 'hooks'
 
-import { AppPage, TestComponents } from 'pages'
+import { AppPage, QuickTest, TestComponents } from 'pages'
 import Layout from 'layout'
 import { ScreenSizeContextProvider } from 'context/ScreenSizeContext'
 
@@ -10,11 +10,13 @@ const routes = {
   home: '/',
   app: '/app',
   testComponents: '/testComponents',
+  quickTest: '/quickTest',
 }
 const routeName = {
   home: 'Home',
   app: 'App',
-  testComponents: 'TestComponents',
+  testComponents: 'Test Components',
+  quickTest: 'Quick Test',
 }
 
 const routeElement = {
@@ -23,6 +25,7 @@ const routeElement = {
   </div>,
   app: <AppPage />,
   testComponents: <TestComponents />,
+  quickTest: <QuickTest />,
 }
 
 const App = () => {

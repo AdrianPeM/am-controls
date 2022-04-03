@@ -1,3 +1,5 @@
+$radioSize: 12px;
+$radioMargin: 6px;
 .radio_button {
     .radio_button__input {
         display: flex;
@@ -12,11 +14,18 @@
             }
         }
         .radio_button__circle {
-            width: 12px;
-            height: 12px;
-            margin: 6px;
+            width: $radioSize;
+            height: $radioSize;
+            margin: $radioMargin;
             border-radius: 50%;
             visibility: hidden;
+            @each $size in 2, 3, 4 {
+                &.size__#{$size} {
+                    width: calc($radioSize + ($radioSize/6)*($size - 1));
+                    height: calc($radioSize + ($radioSize/6)*($size - 1));
+                    // margin: calc(#{$radioMargin} + #{$size - 1}px);
+                }
+            }
         }
     }
 }
