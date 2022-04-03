@@ -21,8 +21,8 @@ $radioMargin: 6px;
             visibility: hidden;
             @each $size in 2, 3, 4 {
                 &.size__#{$size} {
-                    width: calc($radioSize + ($radioSize/6)*($size - 1));
-                    height: calc($radioSize + ($radioSize/6)*($size - 1));
+                    width: calc($radioSize + ($radioSize/3)*($size - 1));
+                    height: calc($radioSize + ($radioSize/3)*($size - 1));
                     // margin: calc(#{$radioMargin} + #{$size - 1}px);
                 }
             }
