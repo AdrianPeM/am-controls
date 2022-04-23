@@ -1,176 +1,141 @@
-import React from 'react'
+import React, { Fragment, useCallback, useEffect, useState } from 'react'
 import './style.scss'
+import Videorecording from './VideoRecording'
+
+
+function wait(delayInMS) {
+    return new Promise(resolve => setTimeout(resolve, delayInMS));
+}
 
 const QuickTest = () => {
-    const dimensiones = [
-        {
-            name: 'Carga Mental',
-            level: 4,
-            departments: [
-                'Aduanas', 'ATV Produccion Ensamble', 'ATV Produccion Fabricacion', 'Calidad Juarez 1 Sorting',
-                'Communication - Juarez', 'Engineering Logistics Juarez 1', 'Finanzas Juarez', 'Finanzas Juarez 1',
-                'Global Services Juarez', 'GP Total Rewards - Juarez', 'Logistica Juarez 1', 'Road IE Fabricacion Juarez 1',
-                'Seguridad y Medio Ambiente Juarez 1',
-            ],
-            controlMeasures: [
-                {
-                    name: 'Crear campañas para establecer y difundir información sobre cargas mentales',
-                    responsibles: ['Maria Martinez', 'Juan Pérez'],
-                    status: 'Programado',
-                    date: '26-May-22',
-                },
-                {
-                    name: 'Capacitar a los empleados sobre técnicas de relajación que puedan realizar en su área de trabajo.',
-                    responsibles: ['Maria Martinez'],
-                    status: 'En curso',
-                    date: '26-May-22',
-                },
-                {
-                    name: 'Analizar y revisar cada descripción de puesto.',
-                    responsibles: ['Maria Martinez'],
-                    status: 'realizado',
-                    date: '26-May-22',
-                },
-            ]
-        },
-        {
-            name: 'Falta de control y autonomía sobre el trabajo',
-            level: 4,
-            departments: [
-                'Finanzas Juarez', 'Finanzas Juarez 1', 'Global Services Juarez', 'GP Total Rewards - Juarez',
-                'Logistica Juarez 1', 'Logistica Juarez 2', 'Operaciones Motores', 'Planeacion Juarez 1',
-                'Purchasing Non-Stock Juarez 1', 'Road IE Fabricacion Juarez 1', 'Seguridad y Medio Ambiente Juarez 1',
-            ],
-            controlMeasures: [
-                {
-                    name: 'Difundir e informar a los trabajadores publicidad sobre cargas de trabajo.',
-                    responsibles: ['Maria Martinez'],
-                    status: 'Programado',
-                    date: '26-May-22',
-                },
-                {
-                    name: 'Capacitar a los trabajadores sobre las funciones de su departamento y las responsabilidades que les corresponden.',
-                    responsibles: ['Maria Martinez'],
-                    status: 'En curso',
-                    date: '26-May-22',
-                },
-                {
-                    name: 'Establecer una rutina de revisión, para saber si los empleados tienen las mismas cantidades de actividades.',
-                    responsibles: ['Maria Martinez'],
-                    status: 'realizado',
-                    date: '26-May-22',
-                },
-                {
-                    name: 'Establecer una rutina de revisión, para saber si los empleados tienen las mismas cantidades de actividades.',
-                    responsibles: ['Maria Martinez'],
-                    status: 'realizado',
-                    date: '26-May-22',
-                },
-            ]
-        },
-        {
-            name: 'Falta de control y autonomía sobre el trabajo',
-            level: 4,
-            departments: [
-                'Finanzas Juarez', 'Finanzas Juarez 1', 'Global Services Juarez', 'GP Total Rewards - Juarez',
-                'Logistica Juarez 1', 'Logistica Juarez 2', 'Operaciones Motores', 'Planeacion Juarez 1',
-                'Purchasing Non-Stock Juarez 1', 'Road IE Fabricacion Juarez 1', 'Seguridad y Medio Ambiente Juarez 1',
-            ],
-            controlMeasures: [
-                {
-                    name: 'Difundir e informar a los trabajadores publicidad sobre cargas de trabajo.',
-                    responsibles: ['Maria Martinez'],
-                    status: 'Programado',
-                    date: '26-May-22',
-                },
-                {
-                    name: 'Capacitar a los trabajadores sobre las funciones de su departamento y las responsabilidades que les corresponden.',
-                    responsibles: ['Maria Martinez'],
-                    status: 'En curso',
-                    date: '26-May-22',
-                },
-                // {
-                //     name: 'Establecer una rutina de revisión, para saber si los empleados tienen las mismas cantidades de actividades.',
-                //     responsibles: ['Maria Martinez'],
-                //     status: 'realizado',
-                //     date: '26-May-22',
-                // },
-                // {
-                //     name: 'Establecer una rutina de revisión, para saber si los empleados tienen las mismas cantidades de actividades.',
-                //     responsibles: ['Maria Martinez'],
-                //     status: 'realizado',
-                //     date: '26-May-22',
-                // },
-            ]
-        },
-        {
-            name: 'Falta de control y autonomía sobre el trabajo',
-            level: 4,
-            departments: [
-                'Finanzas Juarez', 'Finanzas Juarez 1', 'Global Services Juarez', 'GP Total Rewards - Juarez',
-                'Logistica Juarez 1', 'Logistica Juarez 2', 'Operaciones Motores', 'Planeacion Juarez 1',
-                'Purchasing Non-Stock Juarez 1', 'Road IE Fabricacion Juarez 1', 'Seguridad y Medio Ambiente Juarez 1',
-            ],
-            controlMeasures: [
-                {
-                    name: 'Difundir e informar a los trabajadores publicidad sobre cargas de trabajo.',
-                    responsibles: ['Maria Martinez'],
-                    status: 'Programado',
-                    date: '26-May-22',
-                },
-            ]
-        },
+    const [currentQuestion, setQuestion] = useState('')
+    const [savedAnswers, setSavedAnswers] = useState(false)
+
+    const questions = [
+        'Esta es la primer pregunta',
+        'Esta es la segunda pregunta',
+        'Esta es la tercera pregunta',
+        'Esta es la cuarta pregunta',
+        'Esta es la quinta pregunta',
     ]
 
-    const lev = {
-        0: { cn: 'na', txt: 'No Aplica', },
-        1: { cn: 'n', txt: 'Nulo' },
-        2: { cn: 'b', txt: 'BAJO' },
-        3: { cn: 'm', txt: 'MEDIO' },
-        4: { cn: 'a', txt: 'ALTO' },
-        5: { cn: 'ma', txt: 'MUY ALTO' },
-    }
+    const nextStep = useCallback(() => {
+        setQuestion(current => {
+            const newVal = current + 1
 
-    let prevRowStart = 2
+            questions.length == newVal && setSavedAnswers(true)
+            return newVal
+        })
+    }, [questions.length])
 
+    useEffect(() => {
+        if (questions.length > 0) {
+            setQuestion(0)
+        }
+    }, [])
+
+    // render
+
+    // const startHandle = () => {
+    //     let preview = document.getElementById("preview");
+    //     let recording = document.getElementById("recording");
+    //     // let startButton = document.getElementById("startButton");
+    //     // let stopButton = document.getElementById("stopButton");
+    //     let downloadButton = document.getElementById("downloadButton");
+    //     // let logElement = document.getElementById("log");
+
+    //     let recordingTimeMS = 5000;
+    //     navigator.mediaDevices.getUserMedia({
+    //         video: true,
+    //         audio: true
+    //     }).then(stream => {
+    //         preview.srcObject = stream;
+    //         downloadButton.href = stream;
+    //         preview.captureStream = preview.captureStream || preview.mozCaptureStream;
+    //         return new Promise(resolve => preview.onplaying = resolve);
+    //     }).then(() => startRecording(preview.captureStream(), recordingTimeMS))
+    //         .then(recordedChunks => {
+    //             let recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
+    //             recording.src = URL.createObjectURL(recordedBlob);
+    //             downloadButton.href = recording.src;
+    //             downloadButton.download = "RecordedVideo.webm";
+
+    //             console.log("Successfully recorded " + recordedBlob.size + " bytes of " +
+    //                 recordedBlob.type + " media.");
+    //         })
+    //         .catch(e => { console.log(e) });
+    // }
+
+    // function startRecording(stream, lengthInMS) {
+    //     let recorder = new MediaRecorder(stream);
+    //     let data = [];
+
+    //     recorder.ondataavailable = event => data.push(event.data);
+    //     recorder.start();
+    //     console.log(recorder.state + " for " + (lengthInMS / 1000) + " seconds...");
+
+    //     let stopped = new Promise((resolve, reject) => {
+    //         recorder.onstop = resolve;
+    //         recorder.onerror = event => reject(event.name);
+    //     });
+
+    //     let recorded = wait(lengthInMS).then(
+    //         () => recorder.state == "recording" && recorder.stop()
+    //     );
+
+    //     return Promise.all([
+    //         stopped,
+    //         recorded
+    //     ])
+    //         .then(() => data);
+    // }
+
+    // const stopHandle = () => {
+    //     let preview = document.getElementById("preview");
+    //     stop(preview.srcObject);
+    // }
+
+    // function stop(stream) {
+    //     stream.getTracks().forEach(track => track.stop());
+    // }
+
+    // return (
+    //     <div style={{ display: 'flex', gap: '10px', justifyContent:'center' }}>
+    //         <div className="left">
+    //             <div id="startButton" onClick={startHandle} className="button">
+    //                 Start Recording
+    //             </div>
+    //             <h2>Preview</h2>
+    //             <video id="preview" width="160" height="120" autoPlay muted></video>
+    //         </div>
+
+    //         <div className="right">
+    //             <div id="stopButton" onClick={stopHandle} className="button">
+    //                 Stop Recording
+    //             </div>
+    //             <h2>Recording</h2>
+    //             <video id="recording" width="160" height="120" controls></video>
+    //             <a id="downloadButton" className="button">
+    //                 Download
+    //             </a>
+    //         </div>
+
+    //     </div>
+    // )
     return (
-        <div className='implementacion_dimensiones_table'>
-            <div className='implementacion_dimensiones__grid' >
-                <div className='implementacion_dimensiones__item'><p>Dimensión de los factores de riesgo psicosocial</p></div>
-                <div className='implementacion_dimensiones__item'><p>Departamentos</p></div>
-                <div className='implementacion_dimensiones__item'><p>Medidas de control y responsables</p></div>
-                <div className='implementacion_dimensiones__item'><p>Estado de implementación</p></div>
-                {dimensiones.map((dimension, i) => {
-                    const { name, level, departments, controlMeasures } = dimension
-                    const rowEnd = prevRowStart + controlMeasures.length
-                    const gridRow = `${prevRowStart} / ${rowEnd}`
-                    prevRowStart = rowEnd
-                    return (
-                        <React.Fragment>
-                            <div key={`dim-${i}`} className='implementacion_dimensiones__item item_dimension' style={{ gridRow }}>
-                                <p>{name}</p>
-                                <p className={`${lev[level].txt}`}>Nivel: {lev[level].txt}</p>
-                            </div>
-                            <div key={`dep-${i}`} className='implementacion_dimensiones__item item_departments' style={{ gridRow }}>
-                                <p>{departments.join(', ')}</p>
-                            </div>
-
-                            {controlMeasures.map((measure, j) => (
-                                <React.Fragment>
-                                    <div key={`mea-${i}-${j}`} className='implementacion_dimensiones__item item_measure'>
-                                        <p>{measure.name}</p>
-                                        <p>Responsables: <b>{measure.responsibles.join(', ')}</b></p>
-                                    </div>
-                                    <div key={`sta-${i}-${j}`} className='implementacion_dimensiones__item item_status'>
-                                        <p>{measure.status}</p>
-                                        <p>Fecha límite de implementación: <b>{measure.date}</b></p>
-                                    </div>
-                                </React.Fragment>
-                            ))}
-                        </React.Fragment>
-                    )
-                })}
-            </div>
+        <div className='question_container'>
+            {!savedAnswers ?
+                <Fragment>
+                    <div className='question'>
+                        <p>{questions[currentQuestion]}</p>
+                    </div>
+                    {questions[currentQuestion] &&
+                        <button className='btn_next_step' onClick={nextStep}>{questions.length != (currentQuestion + 1) ? 'Siguiente' : 'Guardar'}</button>
+                    }
+                </Fragment>
+                :
+                <Videorecording/>
+            }
         </div>
     )
 }
