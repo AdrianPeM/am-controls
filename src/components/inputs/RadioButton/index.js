@@ -41,10 +41,9 @@ const RadioButton = (props) => {
     return (
         <Grid centerItems className='radio_button' {...{ columns, direction, gap, rows }}>
             {inputs.map(inputName => (
-                <Fragment key={`frag-${inputName}`}>
-                    {labels[inputName] && <p key={`lbl-${inputName}`}>{labels[inputName]}</p>}
+                <Fragment key={inputName}>
+                    {labels[inputName] && <p>{labels[inputName]}</p>}
                     <div
-                        key={inputName}
                         className={`radio_button__input${value[inputName] ? ' checked' : ''}`}
                         onClick={() => handleChange(inputName)}>
                         <div className={`radio_button__circle${likert ? ` size__${Math.abs(inputName)+1}`:''}`} />
