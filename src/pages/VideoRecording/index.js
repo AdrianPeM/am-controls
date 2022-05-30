@@ -8,7 +8,7 @@ const VideoRecorder = (props) => {
     return (
         <div className="recorder_container" style={{ display: show ? '' : 'none' }}>
             <div className="recorder_video_container">
-                <video ref={recorderVideoRef} autoPlay muted></video>
+                <video ref={recorderVideoRef} playsInline autoPlay muted></video>
                 <div ref={recordingFlagRef} className={`recording_flag${recording ? ' recording' : ''}`}>
                     <div className='recording_flag__circle'></div>
                 </div>
@@ -35,7 +35,7 @@ const VideoPreview = (props) => {
     return (
         <div className='recorder_container' style={{ display: show ? '' : 'none' }}>
             <div className="recorder_video_container">
-                <video controls muted src={previewSrc}></video>
+                <video playsInline controls muted src={previewSrc}></video>
             </div>
             <div id="btn_send_record" className="recorder__button" onClick={saveChanges}><p>Send Video</p></div>
             <div id="btn_reset_record" className="recorder__button" onClick={resetRecord}><p>Record again</p></div>
@@ -95,7 +95,7 @@ const VideoRecording = () => {
                 .then(() => data)
                 .then(recordedChunks => {
                     console.log(recordedChunks)
-                    const recordedBlob = new Blob(recordedChunks, { type: "video/webm" })
+                    const recordedBlob = new Blob(recordedChunks, { type: recorderRef.current.mimeType })
                     // setVideoBlob(recordedBlob)
                     setVideo({blob: recordedBlob, previewSrc: URL.createObjectURL(recordedBlob)})
 
@@ -156,7 +156,7 @@ const VideoRecording = () => {
 
                 recorderVideoRef.current.srcObject = streamRef.current
                 recorderVideoRef.current.captureStream = recorderVideoRef.current.captureStream || recorderVideoRef.current.mozCaptureStream
-                recorderVideoRef.current.captureStream()
+                typeof recorderVideoRef.current.captureStream === 'function' && recorderVideoRef.current.captureStream()
 
                 recorderRef.current = new MediaRecorder(streamRef.current)
 
