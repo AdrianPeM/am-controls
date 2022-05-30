@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/am-controls/static/css/main.e4032452.css",
-    "main.js": "/am-controls/static/js/main.96dec4ac.js",
+    "main.js": "/am-controls/static/js/main.fa102bed.js",
     "static/media/IBMPlexSansArabic-Bold.ttf": "/am-controls/static/media/IBMPlexSansArabic-Bold.d91284443c7eb554cc9f.ttf",
     "static/media/IBMPlexSansArabic-Medium.ttf": "/am-controls/static/media/IBMPlexSansArabic-Medium.6d320405b2c4366ea39d.ttf",
     "static/media/IBMPlexSansArabic-ExtraLight.ttf": "/am-controls/static/media/IBMPlexSansArabic-ExtraLight.c9c7b1fff96b0c0dcc37.ttf",
@@ -13,10 +13,10 @@
     "static/media/logo.svg": "/am-controls/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/am-controls/index.html",
     "main.e4032452.css.map": "/am-controls/static/css/main.e4032452.css.map",
-    "main.96dec4ac.js.map": "/am-controls/static/js/main.96dec4ac.js.map"
+    "main.fa102bed.js.map": "/am-controls/static/js/main.fa102bed.js.map"
   },
   "entrypoints": [
     "static/css/main.e4032452.css",
-    "static/js/main.96dec4ac.js"
+    "static/js/main.fa102bed.js"
   ]
 }
